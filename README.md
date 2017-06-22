@@ -1,7 +1,7 @@
 docker-qbittorrent for AArch64
 ================================================
 
-This is a Docker image for running [qBittorrent](http://www.qbittorrent.org/) on AArch64. It is adapted from [wernight's Alpine-based x86 image](https://github.com/wernight/docker-qbittorrent). Below is an extract of the original project's readme.
+This is a Docker image for running [qBittorrent](http://www.qbittorrent.org/) on AArch64. It is adapted from [wernight's Alpine-based x86 image](https://github.com/wernight/docker-qbittorrent). Below is a slightly modified extract of the original project's readme.
 
 About qbittorrent-nox
 ---------------------
@@ -16,6 +16,20 @@ This image is:
 
 Usage
 -----
+
+### Obtaining the image
+
+You can download the image from the [Docker Hub](https://hub.docker.com/r/andreipoe/qbittorrent-aarch64/):
+
+    $ docker pull andreipoe/qbittorrent-aarch64
+
+Alternatively, you can clone the GitHub repository and build the image locally:
+
+    $ git clone https://github.com/andreipoe/docker-qbittorrent-aarch64.git
+    $ cd docker-qbittorrent-aarch64
+    $ docker build -t qbittorrent-aarch64 . 
+
+### Running the image
 
 All mounts and ports are optional and qBittorrent will work even with only:
 
