@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM aarch64/alpine:3.5
 
 # Install required packages
 RUN apk add --no-cache \
@@ -19,10 +19,15 @@ RUN set -x \
       make \
       qt5-qttools-dev \
     \
-    # Install dumb-init
+    # Install dumb-init from the debian archives
     # https://github.com/Yelp/dumb-init
- && curl -Lo /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64 \
- && chmod +x /usr/local/bin/dumb-init \
+    && mkdir /tmp/dumb-init && \
+    cd /tmp/dumb-init && \
+    wget http://ftp.us.debian.org/debian/pool/main/d/dumb-init/dumb-init_1.2.0-1_armhf.deb -O dumb-init.deb && \
+    ar -x dumb-init.deb && \
+    tar -C / -xvf data.tar.xz && \
+    cd .. && \
+    rm -rf dumb-init \
     \
     # Build lib rasterbar from source code (required by qBittorrent)
  && LIBTORRENT_RASTERBAR_URL='https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_0_10/libtorrent-rasterbar-1.0.10.tar.gz' \
@@ -72,5 +77,7 @@ EXPOSE 8080 6881
 
 USER qbittorrent
 
-ENTRYPOINT ["dumb-init", "/entrypoint.sh"]
+# TODO: The ARM version of dumb-init does not seem to work well with this. However, qbittorrent works just fine without it.
+#ENTRYPOINT ["dumb-init", "/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["qbittorrent-nox"]
