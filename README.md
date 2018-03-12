@@ -10,7 +10,7 @@ qBittorrent NoX is the headless with remote web interface version of qBittorrent
 
 This image is:
 
-  * **Small**: `Based on an Alpine Linux Docker image.
+  * **Small**: Based on an Alpine Linux Docker image.
   * **Simple**: Exposes correct ports, configured for remote access.
   * **Secure**: Runs as non-root user with random UID/GID `520`.
 
@@ -61,7 +61,7 @@ So let's create some directories as user 520 (`qbittorrent`):
 
 It is probably a good idea to add `--restart=unless-stopped` so the container restarts if it goes down.
 
-You can change `6081` to some random  port number (also change in the settings).
+You can change `6081` to some random  port number (also change in the settings). However, note that as of version 4.0, you _have to_ use the same Web UI port on the host and inside the container, otherwise you will only see a white page.
 
 _Note: For the container to run, the legal notice had to be automatically accepted. By running the container, you are accepting its terms. Toggle the flag in `qBittorrent.conf` to display the notice again._
 
